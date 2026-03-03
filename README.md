@@ -101,3 +101,28 @@ Each mutation command prints:
   - program unit tests: 11/11
   - integration logic tests: 5/5
 - CLI crate build/check: PASS (`cargo check -p api-key-cli`)
+
+## Requirement → Evidence mapping
+
+| Brief requirement | Evidence |
+|---|---|
+| 8 instructions implemented | `programs/api-key-management/src/lib.rs` program module |
+| permissions bitmask + helper | `READ/WRITE/DELETE/ADMIN/WEBHOOK` + `has_permission` |
+| expiry + validity helpers | `is_expired_at` / `is_valid_at` on `ApiKeyAccount` |
+| tests (>=9) | `anchor test` passing (11 + 5) |
+| CLI commands | `cli/src/main.rs` (`create-key`, `revoke-key`, `rotate-key`, `verify-key`, `list-keys`, `show-key`) |
+| devnet proof | README “Devnet transaction links” table |
+
+## Submission highlights (differentiation)
+
+- Chose **API Key Management (RBAC)** over common rate-limiter patterns for stronger architecture depth and permission modeling.
+- Designed for **hybrid production use**: on-chain source-of-truth + off-chain low-latency cache path.
+- Included transaction-level verification links so reviewers can audit behavior directly on explorer.
+
+## Final verification checklist
+
+- [x] Program builds (`anchor build`)
+- [x] Tests pass (`anchor test`)
+- [x] CLI commands implemented (10 commands total; includes 8 instruction ops + list/show)
+- [x] Devnet transaction links populated
+- [x] README includes architecture/tradeoff/hybrid analysis
