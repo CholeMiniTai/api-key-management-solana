@@ -126,3 +126,11 @@ Each mutation command prints:
 - [x] CLI commands implemented (10 commands total; includes 8 instruction ops + list/show)
 - [x] Devnet transaction links populated
 - [x] README includes architecture/tradeoff/hybrid analysis
+
+One-shot readiness command:
+
+```bash
+./scripts/verify_submission_readiness.sh
+```
+
+This script validates explorer links (HTTP 200), runs `anchor test`, and checks `cargo check -p api-key-cli`.
